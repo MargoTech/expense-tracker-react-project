@@ -1,9 +1,18 @@
-function App() {
+import React from "react";
+import Header from "./Header";
+
+const App = () => {
   return (
-    <div className="bg-blue-500 text-white text-3xl font-bold p-4">
-      Tailwind работает! 🚀
+    <div>
+      <Header
+        title="Expense Tracker"
+        description="Track your expenses easily"
+      />
+      <main>
+        <h2>Your Expenses</h2>
+      </main>
     </div>
   );
-}
+};
 
 export default App;
