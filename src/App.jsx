@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
+import ExpenseForm from "./components/ExpenseForm";
 
 const App = () => {
+  const [expenses, setExpenses] = useState([]);
+
+  const addExpense = (expense) => {
+    setExpenses([...expenses, expense]);
+  };
+
   return (
     <div>
       <Header
