@@ -27,3 +27,18 @@ h1 {
 .expense-item:last-child {
   border-bottom: none;
 }
+
+.expense-list {
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.expense-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}

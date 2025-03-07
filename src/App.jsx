@@ -4,10 +4,14 @@ import ExpenseList from "./components/ExpenseList";
 import "./App.css";
 
 const App = () => {
-  const [expenses, setExpenses] = useState([
-    { title: "Coffee", amount: 5 },
-    { title: "Taxi", amount: 7 },
-  ]);
+  const [expenses, setExpenses] = useState(() => {
+    const savedExpenses = localStorage.getItem("expenses");
+    return savedExpenses ? JSON.parse(savedExpenses) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+  }, [expenses]);
 
   const addExpense = (expense) => {
     setExpenses([...expenses, expense]);
