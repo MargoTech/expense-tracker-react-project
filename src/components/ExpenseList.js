@@ -8,6 +8,7 @@ const ExpenseList = ({ expenses }) => {
           <li key={index} className="expense-item">
             <span>{expense.title}</span>
             <span>{expense.amount} ₽</span>
+            <button onClick={() => onDeleteExpense(index)}>Delete</button>
           </li>
         ))
       )}

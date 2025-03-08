@@ -17,6 +17,10 @@ const App = () => {
     setExpenses([...expenses, expense]);
   };
 
+  const deleteExpense = (indexToRemove) => {
+    setExpenses(expenses.filter((_, index) => index !== indexToRemove));
+  };
+
   return (
     <div className="container">
       <h1>Tracker expenses</h1>
