@@ -25,6 +25,7 @@ const App = () => {
     <div className="container">
       <h1>Tracker expenses</h1>
       <ExpenseForm onAddExpense={addExpense} />
+      <ExpenseList expenses={expenses} onDeleteExpense={deleteExpense} />
 
       <ul>
         {expenses.map((expense, index) => (

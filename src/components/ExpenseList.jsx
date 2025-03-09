@@ -1,8 +1,14 @@
-const ExpenseList = ({ expenses }) => {
+import { useState } from "react";
+
+const ExpenseList = ({ expenses, onDeleteExpense, onEditExpense }) => {
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editTitle, setEditingIndex] = useState("");
+  const [editAmount, setEditAmount] = useState("");
+
   return (
     <ul className="expense-list">
       {expenses.length === 0 ? (
-        <p>Расходов пока нет</p>
+        <p>There is not expenses yet</p>
       ) : (
         expenses.map((expense, index) => (
           <li key={index} className="expense-item">
