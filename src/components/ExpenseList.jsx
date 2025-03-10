@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const ExpenseList = ({ expenses, onDeleteExpense, onEditExpense }) => {
   const [editingIndex, setEditingIndex] = useState(null);
-  const [editTitle, setEditingIndex] = useState("");
+  const [editTitle] = useState("");
   const [editAmount, setEditAmount] = useState("");
 
   return (
