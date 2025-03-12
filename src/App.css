@@ -42,3 +42,15 @@ h1 {
   border-radius: 5px;
   margin-bottom: 5px;
 }
+
+.expense-item button {
+  margin-left: 8px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.expense-item button:hover {
+  color: red;
+}

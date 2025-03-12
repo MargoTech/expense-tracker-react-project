@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ExpenseItem from "./ExpenseItem";
 
 const ExpenseList = ({ expenses, onDeleteExpense, onEditExpense }) => {
   const [editingIndex, setEditingIndex] = useState(null);
@@ -14,6 +15,7 @@ const ExpenseList = ({ expenses, onDeleteExpense, onEditExpense }) => {
           <li key={index} className="expense-item">
             <span>{expense.title}</span>
             <span>{expense.amount} ₽</span>
+            <button onClick={() => onEditExpense(index)}>✏️</button>
             <button onClick={() => onDeleteExpense(index)}>Delete</button>
           </li>
         ))
