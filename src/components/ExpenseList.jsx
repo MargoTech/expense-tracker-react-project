@@ -7,20 +7,24 @@ const ExpenseList = ({ expenses, onDeleteExpense, onEditExpense }) => {
   const [editAmount, setEditAmount] = useState("");
 
   return (
-    <ul className="expense-list">
-      {expenses.length === 0 ? (
-        <p>There is not expenses yet</p>
+    <div className="bg-white shadow-md rounded-lg p-4>
+    <h2 className="text-lg font-semibold mb-2">List expenses</h2>
+    <ul>
+    {expenses.length > 0 ? (
+      expenses.map((expense, index) => (
+        <ExpenseItem
+        key={index} className="expense-item">
+          <span>{expense.title}</span>
+          <span>{expense.amount} ₽</span>
+          <button onClick={() => onEditExpense(index)}>✏️</button>
+          <button onClick={() => onDeleteExpense(index)}>Delete</button>
+      />
+      ))
       ) : (
-        expenses.map((expense, index) => (
-          <li key={index} className="expense-item">
-            <span>{expense.title}</span>
-            <span>{expense.amount} ₽</span>
-            <button onClick={() => onEditExpense(index)}>✏️</button>
-            <button onClick={() => onDeleteExpense(index)}>Delete</button>
-          </li>
-        ))
-      )}
-    </ul>
+      <p className="text-gray-500 text-center">Not expenses yet</p>
+    )}
+        </ul>
+    </div>
   );
 };
 
