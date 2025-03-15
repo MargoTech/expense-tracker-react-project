@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
 import "./App.css";
@@ -26,15 +26,6 @@ const App = () => {
       <h1>Tracker expenses</h1>
       <ExpenseForm onAddExpense={addExpense} />
       <ExpenseList expenses={expenses} onDeleteExpense={deleteExpense} />
-
-      <ul>
-        {expenses.map((expense, index) => (
-          <li key={index}>
-            <span>{expense.title}</span>
-            <span>{expense.amount.toLocaleString()}</span>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
