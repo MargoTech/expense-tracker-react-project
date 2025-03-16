@@ -30,10 +30,10 @@ const ExpenseForm = ({ onAddExpence }) => {
         onChange={(e) => setAmount(e.target.value)}
       />
       <select value={category} onChange={(e) => setCategory(e.target.value)}>
-        <option>Еда</option>
-        <option>Транспорт</option>
-        <option>Развлечения</option>
-        <option>Другое</option>
+        <option>Food</option>
+        <option>Transport</option>
+        <option>Activities</option>
+        <option>Other</option>
       </select>
       <button type="submit">Add</button>
     </form>
