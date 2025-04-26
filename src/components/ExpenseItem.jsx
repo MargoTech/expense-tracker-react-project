@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Edit3, Trash2 } from "lucide-react";
 
 const ExpenseItem = ({ expense, onDelete, onEdit }) => {
   const categoryColors = {

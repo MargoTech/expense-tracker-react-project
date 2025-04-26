@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-const ExpenseForm = ({ onAddExpence }) => {
+const ExpenseForm = ({ onAddExpense }) => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("Food");
@@ -10,7 +10,7 @@ const ExpenseForm = ({ onAddExpence }) => {
     e.preventDefault();
     if (!title || !amount) return;
 
-    onAddExpense({ title, amount: parseFloat(amount) });
+    onAddExpense({ title, amount: parseFloat(amount), category });
     setTitle("");
     setAmount("");
     setCategory("Food");
