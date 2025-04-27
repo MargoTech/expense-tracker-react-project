@@ -20,7 +20,8 @@ const ExpenseItem = ({ expense, onDelete, onEdit }) => {
       className={`flex justify-between items-center p-2 rounded-md shadow-md ${categoryClass}`}
     >
       <span className="font-medium">
-        {expense.title} - {expense.amount.toLocalString()}₽ ({expense.category})
+        {expense.title} - {expense.amount.toLocaleString()}₽ ({expense.category}
+        )
       </span>
       <div>
         <button

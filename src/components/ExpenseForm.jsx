@@ -8,9 +8,16 @@ const ExpenseForm = ({ onAddExpense }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title || !amount) return;
+    if (!title || !amount || isNaN(amount)) return;
 
-    onAddExpense({ title, amount: parseFloat(amount), category });
+    const newExpense = {
+      id: Date.now(),
+      title,
+      amount: parseFloat(amount),
+      category,
+    };
+
+    onAddExpense(newExpense);
     setTitle("");
     setAmount("");
     setCategory("Food");

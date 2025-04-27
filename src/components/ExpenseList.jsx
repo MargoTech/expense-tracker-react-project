@@ -17,10 +17,10 @@ const ExpenseList = ({ expenses, onDeleteExpense, onEditExpense }) => {
                 transition={{ duration: 0.3 }}
               >
                 <ExpenseItem
-                  key={index}
+                  key={expense.id}
                   expense={expense}
-                  onEditExpense={() => onEditExpense(index)}
-                  onDeleteExpense={() => onDeleteExpense(index)}
+                  onEditExpense={() => onEditExpense(expense.id)}
+                  onDeleteExpense={() => onDeleteExpense(expense.id)}
                 />
               </motion.li>
             ))
