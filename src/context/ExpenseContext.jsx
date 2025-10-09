@@ -1,4 +1,4 @@
-import { createContext, useReduce, useContext, useEffect } from "react";
+import { createContext, useReducer, useContext, useEffect } from "react";
 
 const ExpenseContext = createContext();
 
@@ -18,3 +18,31 @@ const expenseReducer = (state, action) => {
       return state;
   }
 };
+
+export const ExpenseProvider = ({ children }) => {
+  const [expenses, dispatch] = useReducer(expenseReducer, []);
+
+  useEffect(() => {
+    const savedExpenses = JSON.parse(localStorage.getItem("expenses")) || [];
+    dispatch({ type: "LOAD", payload: savedExpenses });
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+  }, [expenses]);
+
+  const addExpense = (expense) => dispatch({ type: "ADD", payload: expense });
+  const deleteExpense = (id) => dispatch({ type: "DELETE", payload: id });
+  const editExpense = (updatedExpense) =>
+    dispatch({ type: "EDIT", payload: updatedExpense });
+
+  return (
+    <ExpenseContext.Provider
+      value={{ expenses, addExpense, deleteExpense, editExpense }}
+    >
+      {children}
+    </ExpenseContext.Provider>
+  );
+};
+
+export const useExpenses = () => useContext(ExpenseContext);
