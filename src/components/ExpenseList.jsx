@@ -13,39 +13,35 @@ const ExpenseList = () => {
   }, [expenses]);
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4">
-      <h2 className="text-lg font-semibold mb-2">List expenses</h2>
-      <ul>
+    <motion.div
+      className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-4"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
+      <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">
+        Expense List
+      </h2>
+
+      <ul className="flex flex-col gap-2">
         <AnimatePresence>
-          {expenses.length > 0 ? (
-            expenses.map((expense, index) => (
-              <motion.li
-                key={index}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.3 }}
-              >
-                <ExpenseItem
-                  key={expense.id}
-                  expense={expense}
-                  onEditExpense={() => onEditExpense(expense.id)}
-                  onDeleteExpense={() => onDeleteExpense(expense.id)}
-                />
-              </motion.li>
+          {sortedExpenses.length > 0 ? (
+            sortedExpenses.map((expense) => (
+              <ExpenseItem key={expense.id} expense={expense} />
             ))
           ) : (
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-gray-500 text-center"
+              exit={{ opacity: 0 }}
+              className="text-gray-500 dark:text-gray-300 text-center py-4"
             >
-              Not expenses yet
+              Not expenses yet 💤
             </motion.p>
           )}
         </AnimatePresence>
       </ul>
-    </div>
+    </motion.div>
   );
 };
 
