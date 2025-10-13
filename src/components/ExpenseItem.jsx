@@ -1,36 +1,41 @@
+import React, { useCallback } from "react";
 import { motion } from "framer-motion";
+import { useExpenses } from "../context/ExpenseContext";
 
-const ExpenseItem = ({ expense, onDelete, onEdit }) => {
-  const categoryColors = {
-    Food: "bg-red-200 text-red-800",
-    Transport: "bg-blue-200 text-blue-800",
-    Activities: "bg-green-200 text-green-800",
-    Other: "bg-gray-200 text-gray-800",
-  };
+const categoryColors = {
+  Food: "bg-red-200 text-red-800",
+  Transport: "bg-blue-200 text-blue-800",
+  Activities: "bg-green-200 text-green-800",
+  Other: "bg-gray-200 text-gray-800",
+};
 
-  const categoryClass =
-    categoryColors[expense.category] || categoryColors["Other"];
+const ExpenseItem = ({ expense }) => {
+  const { deleteExpense } = useExpenses();
+
+  const handleDelete = useCallback(() => {
+    deleteExpense(expense.id);
+  }, [deleteExpense, expense.id]);
 
   return (
     <motion.li
+      layout
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, x: -50 }}
-      layout
+      transition={{ duration: 0.25 }}
       className={`flex justify-between items-center p-2 rounded-md shadow-md ${categoryClass}`}
     >
       <span className="font-medium">
-        {expense.title} - {expense.amount.toLocaleString()}₽ ({expense.category}
-        )
+        {expense.title} - {expense.amount.toLocaleString()}₽ (
+        <span className="ml-1 opacity-70 text-sm">({expense.category})</span>)
       </span>
+
       <div>
         <button
-          className="text-blue-500 hover:text-blue-700 mx-2"
-          onClick={onEdit}
+          onClick={handleDelete}
+          className="text-red-500 hover:text-red-700 text-lg ml-3"
+          title="Delete expense"
         >
-          ✏️
-        </button>
-        <button className="text-red-500 hover:text-red-700" onClick={onDelete}>
           ❌
         </button>
       </div>
@@ -38,4 +43,4 @@ const ExpenseItem = ({ expense, onDelete, onEdit }) => {
   );
 };
 
-export default ExpenseItem;
+export default React.memo(ExpenseItem);
