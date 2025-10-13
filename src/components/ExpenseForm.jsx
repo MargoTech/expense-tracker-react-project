@@ -1,27 +1,39 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { motion } from "framer-motion";
+import { useExpenses } from "../context/ExpenseContext";
+import { useExpenseForm } from "../hooks/useExpenseForm";
 
-const ExpenseForm = ({ onAddExpense }) => {
-  const [title, setTitle] = useState("");
-  const [amount, setAmount] = useState("");
-  const [category, setCategory] = useState("Food");
+const MotionInput = (props) => (
+  <motion.input
+    initial={{ opacity: 0, x: -20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.3 }}
+    {...props}
+  />
+);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!title || !amount || isNaN(amount)) return;
+const ExpenseForm = () => {
+  const { addExpense } = useExpenses();
+  const { form, handleChange, resetForm, isValid } = useExpenseForm();
 
-    const newExpense = {
-      id: Date.now(),
-      title,
-      amount: parseFloat(amount),
-      category,
-    };
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (!isValid()) return;
 
-    onAddExpense(newExpense);
-    setTitle("");
-    setAmount("");
-    setCategory("Food");
-  };
+      const newExpense = {
+        id: crypto.randomUUID(),
+        title: form.title.trim(),
+        amount: parseFloat(form.amount),
+        category: form.category,
+        createdAt: new Date().toISOString(),
+      };
+
+      addExpense(newExpense);
+      resetForm();
+    },
+    [isValid, addExpense, resetForm, form]
+  );
 
   return (
     <motion.form
@@ -39,33 +51,19 @@ const ExpenseForm = ({ onAddExpense }) => {
       >
         Add New Expense
       </motion.h2>
-      <motion.input
+      <MotionInput
+        name="title"
         type="text"
         placeholder="Name of expense"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        value={form.title}
+        onChange={handleChange}
         className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.3 }}
-      />
-      <motion.input
-        type="number"
-        placeholder="Amount"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-        className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.4 }}
       />
       <motion.select
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
+        name="category"
+        value={form.category}
+        onChange={handleChange}
         className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.5 }}
       >
         <option>Food</option>
         <option>Transport</option>
@@ -84,4 +82,4 @@ const ExpenseForm = ({ onAddExpense }) => {
   );
 };
 
-export default ExpenseForm;
+export default React.memo(ExpenseForm);
