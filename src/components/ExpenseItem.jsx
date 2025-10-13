@@ -29,7 +29,6 @@ const ExpenseItem = ({ expense }) => {
         {expense.title} - {expense.amount.toLocaleString()}₽ (
         <span className="ml-1 opacity-70 text-sm">({expense.category})</span>)
       </span>
-
       <div>
         <button
           onClick={handleDelete}
