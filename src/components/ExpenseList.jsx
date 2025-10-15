@@ -14,6 +14,7 @@ const ExpenseList = () => {
 
   return (
     <motion.div
+      layout
       className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-4"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}

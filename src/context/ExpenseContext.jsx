@@ -2,30 +2,25 @@ import { createContext, useReducer, useContext, useEffect } from "react";
 
 const ExpenseContext = createContext();
 
+const initialState = JSON.parse(localStorage.getItem("expenses")) || [];
+
 const expenseReducer = (state, action) => {
   switch (action.type) {
     case "ADD":
-      return [...state.action.payload];
+      return [...state, action.payload];
     case "DELETE":
       return state.filter((expense) => expense.id !== action.payload);
     case "EDIT":
       return state.map((expense) =>
         expense.id === action.payload.id ? action.payload : expense
       );
-    case "LOAD":
-      return action.payload;
     default:
       return state;
   }
 };
 
 export const ExpenseProvider = ({ children }) => {
-  const [expenses, dispatch] = useReducer(expenseReducer, []);
-
-  useEffect(() => {
-    const savedExpenses = JSON.parse(localStorage.getItem("expenses")) || [];
-    dispatch({ type: "LOAD", payload: savedExpenses });
-  }, []);
+  const [expenses, dispatch] = useReducer(expenseReducer, initialState);
 
   useEffect(() => {
     localStorage.setItem("expenses", JSON.stringify(expenses));
