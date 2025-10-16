@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { motion } from "framer-motion";
 import { useExpenses } from "../context/ExpenseContext";
+import { style } from "framer-motion/client";
 
 const categoryColors = {
   Food: "bg-red-200 text-red-800",
@@ -29,8 +30,11 @@ const ExpenseItem = ({ expense }) => {
       className={`flex justify-between items-center p-2 rounded-md shadow-md ${categoryClass}`}
     >
       <span className="font-medium">
-        {expense.title} - {expense.amount.toLocaleString()}₽ (
-        <span className="ml-1 opacity-70 text-sm">({expense.category})</span>)
+        {new Intl.NumberFormat("de-DE", {
+          style: "currency",
+          currency: "EUR",
+        }).format(expense.amount)}{" "}
+        (<span className="ml-1 opacity-70 text-sm">({expense.category})</span>)
       </span>
       <div>
         <button
