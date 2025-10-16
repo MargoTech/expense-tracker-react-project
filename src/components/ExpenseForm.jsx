@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import { useExpenses } from "../context/ExpenseContext";
 import { useExpenseForm } from "../hooks/useExpenseForm";
