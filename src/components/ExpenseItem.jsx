@@ -16,6 +16,9 @@ const ExpenseItem = ({ expense }) => {
     deleteExpense(expense.id);
   }, [deleteExpense, expense.id]);
 
+  const categoryClass =
+    categoryColors[expense.category] || categoryColors["Other"];
+
   return (
     <motion.li
       layout
