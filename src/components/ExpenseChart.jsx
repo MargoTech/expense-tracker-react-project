@@ -52,3 +52,5 @@ const ExpenseChart = () => {
     </div>
   );
 };
+
+export default ExpenseChart;
