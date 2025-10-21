@@ -21,7 +21,7 @@ const ExpenseChart = () => {
         .filter((exp) => exp.category === cat)
         .reduce((sum, exp) => sum + exp.amount, 0);
 
-      return { name: cat, value: "total" };
+      return { name: cat, value: total };
     }
   );
 
