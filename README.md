@@ -23,7 +23,7 @@ A modern and responsive expense tracker built with React. Easily track your inco
 
 ## 🔗 Live Demo
 
-👉 [Live](https://68d9a482af6a5f00082f5eea--expencse-tracker.netlify.app/)
+👉 [Live](https://68f7b5c32257060008f8eccf--expencse-tracker.netlify.app/)
 
 ## 📸 Screenshots
 
