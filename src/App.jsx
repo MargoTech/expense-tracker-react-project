@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
 import ExpenseChart from "./components/ExpenseChart";
+import ExpenseSummary from "./components/ExpenseSummary";
 import "./App.css";
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
       <ExpenseForm onAddExpense={addExpense} />
       <ExpenseList expenses={expenses} onDeleteExpense={deleteExpense} />
       <ExpenseChart />
+      <ExpenseSummary />
     </div>
   );
 };
