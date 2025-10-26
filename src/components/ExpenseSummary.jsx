@@ -20,10 +20,27 @@ const ExpenseSummary = () => {
 
   return (
     <div className="bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 mt-6 text-center">
-      <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
-        Total Expenses
-      </h2>
-      <p className="text-3xl font-bold text-blue-600">${total.toFixed(2)}</p>
+      <div>
+        <p className="text-gray-500 dark:text-gray-400">Total Expenses</p>
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+          {new Intl.NumberFormat("de-DE", {
+            style: "currency",
+            currency: "EUR",
+          }).format(total)}
+        </h2>
+      </div>
+      <div>
+        <p className="text-gray-500 dark:text-gray-400">Number of Entries</p>
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+          {expenses.length}
+        </h2>
+      </div>
+      <div>
+        <p className="text-gray-500 dark:text-gray-400">Top Category</p>
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+          {topCategory}
+        </h2>
+      </div>
     </div>
   );
 };
