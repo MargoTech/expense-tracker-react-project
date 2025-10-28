@@ -4,6 +4,7 @@ import ExpenseList from "./components/ExpenseList";
 import ExpenseChart from "./components/ExpenseChart";
 import ExpenseSummary from "./components/ExpenseSummary";
 import "./App.css";
+import DailyStats from "./components/DailyStats";
 
 const App = () => {
   const [expenses, setExpenses] = useState(() => {
@@ -30,6 +31,7 @@ const App = () => {
       <ExpenseList expenses={expenses} onDeleteExpense={deleteExpense} />
       <ExpenseChart />
       <ExpenseSummary />
+      <DailyStats />
     </div>
   );
 };

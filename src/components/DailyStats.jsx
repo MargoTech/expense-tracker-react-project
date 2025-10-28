@@ -1,13 +1,18 @@
 import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import { useExpenses } from "../context/ExpenseContext";
-import { span } from "framer-motion/client";
+import { div, span } from "framer-motion/client";
 
 const StatCard = ({ title, amount, color, emoji }) => (
-  <motion.div>
-    <span>{emoji}</span>
-    <h3>{title}</h3>
-    <p>{amount.toFixed(2)} €</p>
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className={`flex flex-col items-center justify-center p-6 rounded-xl shadow-md w-full sm:w-1/2 text-white ${color}`}
+  >
+    <span className="text-3xl mb-2">{emoji}</span>
+    <h3 className="text-lg font-semibold">{title}</h3>
+    <p className="text-2xl font-bold mt-2">{amount.toFixed(2)} €</p>
   </motion.div>
 );
 const DailyStats = () => {
@@ -27,4 +32,23 @@ const DailyStats = () => {
       { income: 0, expense: 0 }
     );
   }, [todayRecords]);
+
+  return (
+    <div>
+      <StatCard
+        title="Earned Today"
+        amount={income}
+        color="bg-green-500"
+        emoji="💰"
+      />
+      <StatCard
+        title="Spent Today"
+        amount={expense}
+        color="bg-red-500"
+        emoji="💸"
+      />
+    </div>
+  );
 };
+
+export default DailyStats;
