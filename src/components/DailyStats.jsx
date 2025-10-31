@@ -22,8 +22,8 @@ const DailyStats = () => {
   const todayRecords = expenses.filter(
     (exp) => exp.createdAt.split("T")[0] === today
   );
-  const { income, expense } = useMemo(() => {
-    return todayRecords.reduce(
+  const { income, expense, net } = useMemo(() => {
+    const result = todayRecords.reduce(
       (acc, curr) => {
         if (curr.type === "income") acc.income += curr.amount;
         else acc.expense += curr.amount;
@@ -31,10 +31,12 @@ const DailyStats = () => {
       },
       { income: 0, expense: 0 }
     );
+    result.net = result.income - result.expense;
+    return result;
   }, [todayRecords]);
 
   return (
-    <div>
+    <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-4xl">
       <StatCard
         title="Earned Today"
         amount={income}
@@ -46,6 +48,12 @@ const DailyStats = () => {
         amount={expense}
         color="bg-red-500"
         emoji="💸"
+      />
+      <StatCard
+        title="Net Today"
+        amount={net}
+        color={net >= 0 ? "bg-blue-500" : "bg-yellow-500"}
+        emoji={net >= 0 ? "📈" : "📉"}
       />
     </div>
   );
