@@ -26,6 +26,7 @@ const ExpenseForm = () => {
         title: form.title.trim(),
         amount: parseFloat(form.amount),
         category: form.category,
+        type: form.type,
         createdAt: new Date().toISOString(),
       };
 
@@ -49,12 +50,12 @@ const ExpenseForm = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.2 }}
       >
-        Add New Expense
+        Add New Record
       </motion.h2>
       <MotionInput
         name="title"
         type="text"
-        placeholder="Name of expense"
+        placeholder="Name of record"
         value={form.title}
         onChange={handleChange}
         className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -68,6 +69,16 @@ const ExpenseForm = () => {
         className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
       />
       <motion.select
+        name="type"
+        value={form.type}
+        onChange={handleChange}
+        className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      >
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+      </motion.select>
+
+      <motion.select
         name="category"
         value={form.category}
         onChange={handleChange}
@@ -78,6 +89,7 @@ const ExpenseForm = () => {
         <option>Activities</option>
         <option>Other</option>
       </motion.select>
+
       <motion.button
         type="submit"
         whileHover={{ scale: 1.05 }}

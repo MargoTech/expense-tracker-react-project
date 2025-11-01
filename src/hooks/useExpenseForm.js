@@ -5,6 +5,7 @@ export const useExpenseForm = (initialCategory = "Food") => {
     title: "",
     amount: "",
     category: initialCategory,
+    type: "expense",
   });
 
   const handleChange = (e) => {
