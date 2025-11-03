@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import { useExpenses } from "../context/ExpenseContext";
-import { div, span } from "framer-motion/client";
 
 const StatCard = ({ title, amount, color, emoji }) => (
   <motion.div

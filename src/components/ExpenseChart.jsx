@@ -8,43 +8,71 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useExpenses } from "../context/ExpenseContext";
-import { div } from "framer-motion/client";
 
-const COLORS = ["#FF6384", "#36A2EB", "#4CAF50", "#9E9E9E"];
+const COLORS_EXPENSE = ["#FF6384", "#FF9F40", "#FFCD56", "#FF6384"];
+const COLORS_INCOME = ["#36A2EB", "#4BC0C0", "#9966FF", "#4CAF50"];
 
 const ExpenseChart = () => {
   const { expenses } = useExpenses();
 
-  const data = ["Food", "Transport", "Activities", "Other"].map(
-    (cat, index) => {
-      const total = expenses
-        .filter((exp) => exp.category === cat)
-        .reduce((sum, exp) => sum + exp.amount, 0);
+  const categories = ["Food", "Transport", "Activities", "Other"];
 
-      return { name: cat, value: total };
-    }
-  );
+  const expenseData = categories.map((cat) => {
+    const total = expenses
+      .filter((exp) => exp.category === cat)
+      .reduce((sum, exp) => sum + exp.amount, 0);
+    return { name: cat, value: total };
+  });
+
+  const incomeData = categories.map((cat) => {
+    const total = expenses
+      .filter((exp) => exp.category === cat)
+      .reduce((sum, exp) => sum + exp.amount, 0);
+    return { name: cat, value: total };
+  });
 
   return (
     <div className="bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 mt-6">
       <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">
-        Expenses by Category
+        Income vs Expenses by Category
       </h2>
-      <ResponsiveContainer width="100%" height={300}>
+
+      <ResponsiveContainer width="100%" height={350}>
         <PieChart>
           <Pie
-            data={data}
+            data={expenseData}
             dataKey="value"
             nameKey="name"
             cx="50%"
             cy="50%"
-            outerRadius={100}
+            outerRadius={120}
             label
           >
-            {data.map((entry, index) => (
-              <Cell key={index} fill={COLORS[index % COLORS.length]} />
+            {expenseData.map((entry, index) => (
+              <Cell
+                key={`exp-${index}`}
+                fill={COLORS_EXPENSE[index % COLORS_EXPENSE.length]}
+              />
             ))}
           </Pie>
+
+          <Pie
+            data={incomeData}
+            dataKey="value"
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            innerRadius={60}
+            outerRadius={90}
+          >
+            {incomeData.map((entry, index) => (
+              <Cell
+                key={`inc-${index}`}
+                fill={COLORS_INCOME[index % COLORS_INCOME.length]}
+              />
+            ))}
+          </Pie>
+
           <Tooltip />
           <Legend />
         </PieChart>
