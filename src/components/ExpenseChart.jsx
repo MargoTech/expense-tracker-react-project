@@ -6,10 +6,11 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  Label,
 } from "recharts";
 import { useExpenses } from "../context/ExpenseContext";
 
-const COLORS_EXPENSE = ["#EF4444", "#F97316", "#FACC15", "#DC2626"];
+const COLORS_EXPENSE = ["#EF4444", "#F59E0B", "#3B82F6", "#A855F7"];
 const COLOR_INCOME = "#10B981";
 
 const ExpenseChart = () => {
@@ -39,13 +40,33 @@ const ExpenseChart = () => {
       <ResponsiveContainer width="100%" height={350}>
         <PieChart>
           <Pie
+            data={incomeData}
+            dataKey="value"
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            innerRadius={0}
+            outerRadius={70}
+            label={({ value }) => (value > 0 ? `${value} €` : "")}
+            isAnimationActive={true}
+          >
+            {incomeData.map((_, index) => (
+              <Cell key={index} fill={COLOR_INCOME} />
+            ))}
+          </Pie>
+
+          <Pie
             data={expenseData}
             dataKey="value"
             nameKey="name"
             cx="50%"
             cy="50%"
-            outerRadius={120}
-            label
+            innerRadius={90}
+            outerRadius={130}
+            label={({ name, value }) =>
+              value > 0 ? `${name}: ${value} €` : ""
+            }
+            labelLine={false}
           >
             {expenseData.map((_, index) => (
               <Cell
@@ -55,26 +76,19 @@ const ExpenseChart = () => {
             ))}
           </Pie>
 
-          <Pie
-            data={incomeData}
-            dataKey="value"
-            nameKey="name"
-            cx="50%"
-            cy="50%"
-            innerRadius={60}
-            outerRadius={90}
-          >
-            {incomeData.map((_, index) => (
-              <Cell fill={COLOR_INCOME} />
-            ))}
-          </Pie>
-
-          <Tooltip />
+          <Tooltip
+            formatter={(value, name) => [`${value} €`, name]}
+            contentStyle={{
+              backgroundColor: "#1F2937",
+              color: "#fff",
+              borderRadius: "8px",
+            }}
+          />
           <Legend />
         </PieChart>
       </ResponsiveContainer>
 
-      <div className="flex justify-center gap-8 mt-4">
+      {/* <div className="flex justify-center gap-8 mt-4">
         <div className="flex items-center gap-2">
           <span className="w-4 h-4 bg-blue-500 rounded-full"></span>
           <span className="text-sm text-gray-700 dark:text-gray-200">
@@ -87,7 +101,7 @@ const ExpenseChart = () => {
             Expenses
           </span>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
