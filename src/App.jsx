@@ -5,6 +5,7 @@ import ExpenseChart from "./components/ExpenseChart";
 import ExpenseSummary from "./components/ExpenseSummary";
 import "./App.css";
 import DailyStats from "./components/DailyStats";
+import MonthlyChart from "./components/MonthlyChart";
 
 const App = () => {
   const [expenses, setExpenses] = useState(() => {
@@ -32,6 +33,7 @@ const App = () => {
       <ExpenseChart />
       <ExpenseSummary />
       <DailyStats />
+      <MonthlyChart />
     </div>
   );
 };

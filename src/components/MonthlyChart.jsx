@@ -10,7 +10,6 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useExpenses } from "../context/ExpenseContext";
-import { div } from "framer-motion/client";
 
 const MonthlyChart = () => {
   const { expenses } = useExpenses();
@@ -33,27 +32,33 @@ const MonthlyChart = () => {
   }, [expenses, currentMonth]);
 
   return (
-    <div>
-      <h2>Income & Expenses — This Month</h2>
+    <div className="bg-white dark:bg-gray-800 shadow-md rounded-xl p-4 mt-6">
+      <h2 className="text-xl font-semibold text-center text-gray-800 dark:text-white mb-4">
+        Income & Expenses — {currentMonth}
+      </h2>
 
-      <ResponsiveContainer>
-        <LineChart data={dailyData} width={400} height={250}>
+      <ResponsiveContainer width="100%" height={350}>
+        <LineChart data={dailyData}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
+          <XAxis dataKey="date" tickFormatter={(date) => date.slice(-2)} />
           <YAxis />
           <Tooltip />
           <Legend />
           <Line
             type="monotone"
             dataKey="income"
-            stroke="#4ade80"
-            name="Income"
+            stroke="#10B981"
+            strokeWidth={3}
+            dot={{ r: 4 }}
+            name="Income (€)"
           />
           <Line
             type="monotone"
             dataKey="expense"
-            stroke="#f87171"
-            name="Expense"
+            stroke="#EF4444"
+            strokeWidth={3}
+            dot={{ r: 4 }}
+            name="Expense (€)"
           />
         </LineChart>
       </ResponsiveContainer>
