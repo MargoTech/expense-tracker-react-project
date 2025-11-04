@@ -53,6 +53,17 @@ const ExpenseChart = () => {
             {incomeData.map((_, index) => (
               <Cell key={index} fill={COLOR_INCOME} />
             ))}
+            <Label
+              value={`Income\n${totalIncome} €`}
+              position="center"
+              fill="#10B981"
+              style={{
+                fontSize: "16px",
+                fontWeight: "bold",
+                textAnchor: "middle",
+                lineHeight: 1.4,
+              }}
+            />
           </Pie>
 
           <Pie
@@ -82,26 +93,27 @@ const ExpenseChart = () => {
               backgroundColor: "#1F2937",
               color: "#fff",
               borderRadius: "8px",
+              border: "none",
             }}
           />
           <Legend />
         </PieChart>
       </ResponsiveContainer>
 
-      {/* <div className="flex justify-center gap-8 mt-4">
+      <div className="flex justify-center gap-8 mt-6">
         <div className="flex items-center gap-2">
-          <span className="w-4 h-4 bg-blue-500 rounded-full"></span>
-          <span className="text-sm text-gray-700 dark:text-gray-200">
+          <span className="w-4 h-4 bg-green-500 rounded-full"></span>
+          <span className="text-sm text-gray-700 dark:text-gray-200 font-medium">
             Income
           </span>
         </div>
         <div className="flex items-center gap-2">
           <span className="w-4 h-4 bg-red-500 rounded-full"></span>
-          <span className="text-sm text-gray-700 dark:text-gray-200">
+          <span className="text-sm text-gray-700 dark:text-gray-200 font-medium">
             Expenses
           </span>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
